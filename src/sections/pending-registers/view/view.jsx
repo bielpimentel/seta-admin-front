@@ -11,7 +11,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
 import { fetchData, postData, deleteData } from 'src/utils/api';
-import { pendings } from 'src/_mock/pendings';
 
 import Scrollbar from 'src/components/scrollbar';
 import TableHeader from 'src/components/table/table-head';
