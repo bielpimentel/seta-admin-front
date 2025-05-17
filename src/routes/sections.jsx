@@ -26,6 +26,9 @@ export const MailExtensionsPage = lazy(() => import('src/pages/mail-extensions')
 export const MailExtensionCreatePage = lazy(() => import('src/pages/mail-extensions/create'));
 export const MailExtensionEditPage = lazy(() => import('src/pages/mail-extensions/edit'));
 
+// ------------------ QR CODE -------------------
+export const QRCodeReaderPage = lazy(() => import('src/pages/qrcode-reader'));
+
 export const LoginPage = lazy(() => import('src/pages/login'));
 export const Page404 = lazy(() => import('src/pages/page-not-found'));
 
@@ -56,6 +59,14 @@ export default function Router() {
         { path: 'emails-permitidos/novo', element: <MailExtensionCreatePage /> },
         { path: 'emails-permitidos/editar/:id', element: <MailExtensionEditPage /> },
       ],
+    },
+    {
+      path: 'qrcode',
+      element: (
+        <AuthGuard requireAuth={true} restrictedArea={true}>
+          <QRCodeReaderPage />
+        </AuthGuard>
+      ),
     },
     {
       path: '',

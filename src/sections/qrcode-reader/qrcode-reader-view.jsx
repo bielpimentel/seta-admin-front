@@ -12,7 +12,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 import { useRouter } from 'src/routes/hooks';
 
-import { postLogin } from 'src/utils/api';
+import { postData } from 'src/utils/api';
 
 import { bgGradient } from 'src/theme/css';
 
@@ -21,7 +21,7 @@ import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function LoginView() {
+export default function QRCodeReaderView() {
   const theme = useTheme();
 
   const router = useRouter();
@@ -36,7 +36,7 @@ export default function LoginView() {
     try {
       if(email !== "" && password !== ""){
         const body = { email, password };
-        const response = await postLogin("login", body);
+        const response = await postData("login", body);
         localStorage.setItem('token', response.token);
         router.push("/dashboard");
       }
@@ -120,14 +120,12 @@ export default function LoginView() {
             }}
           />
           <Typography variant="h4" mb={2} textAlign="center">
-            Entrar
+            LEITOR DE QRCODE
           </Typography>
 
           <p style={{ textAlign: 'center', maxWidth: 300, margin: 'auto' }}>
-            Preencha com seu email e senha para acessar o painel administrativo
+            Abaixo, você pode fazer o login no sistema utilizando seu QRCode.
           </p>
-
-          {renderForm}
         </Card>
       </Stack>
     </Box>
