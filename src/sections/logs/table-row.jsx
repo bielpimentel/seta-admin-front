@@ -10,7 +10,7 @@ export default function AccessLogTableRow({
   name,
   email,
   type,
-  createdAt,
+  accessDateTime,
 }) {
 
 return (
@@ -19,7 +19,7 @@ return (
       <TableCell>{name}</TableCell>
       <TableCell>{email}</TableCell>
       <TableCell>{type}</TableCell>
-      <TableCell>{createdAt}</TableCell>
+      <TableCell>{new Date(accessDateTime).toLocaleString('pt-BR', { hour12: false })}</TableCell>
     </TableRow>
   );
 }
@@ -29,5 +29,5 @@ AccessLogTableRow.propTypes = {
   name: PropTypes.string,
   email: PropTypes.string,
   type: PropTypes.string,
-  createdAt: PropTypes.string,
+  accessDateTime: PropTypes.string,
 };

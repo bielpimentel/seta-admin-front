@@ -10,7 +10,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
 import { fetchData } from 'src/utils/api';
-import { fakeLogs } from 'src/_mock/logs';
 
 import Scrollbar from 'src/components/scrollbar';
 import TableHeaderWithoutCheckbox from 'src/components/table/table-head-without-checkbox';
@@ -27,12 +26,12 @@ export default function LogsView() {
   const [order, setOrder] = useState('desc');
   const [orderBy, setOrderBy] = useState('id');
   const [filter, setFilter] = useState('');
-  const [rowsPerPage, setRowsPerPage] = useState(25);
-  const [logs, setLogs] = useState(fakeLogs);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [logs, setLogs] = useState([]);
   const [totalRows, setTotalRows] = useState(0);
 
   const getAllLogs = useCallback(async () => {
-    let url = `logs?page=${page}&size=${rowsPerPage}&sort=${orderBy},${order}`;
+    let url = `access-logs?page=${page}&size=${rowsPerPage}&sort=${orderBy},${order}`;
     if (filter !== '') {
       url += `&search=${filter}`;
     }
@@ -99,10 +98,10 @@ export default function LogsView() {
                 orderBy={orderBy}
                 headLabel={[
                   { id: 'id', label: '#' },
-                  { id: 'name', label: 'Nome' },
-                  { id: 'email', label: 'E-mail' },
+                  { id: 'userName', label: 'Nome' },
+                  { id: 'userEmail', label: 'E-mail' },
                   { id: 'type', label: 'Tipo' },
-                  { id: 'createdAt', label: 'Data/Hora' },
+                  { id: 'accessDateTime', label: 'Data/Hora' },
                 ]}
                 onRequestSort={handleSort}
               />
@@ -115,7 +114,7 @@ export default function LogsView() {
                       name={row.name}
                       email={row.email}
                       type={row.type}
-                      createdAt={row.createdAt}
+                      accessDateTime={row.accessDateTime}
                     />
                   ))}
 
