@@ -32,6 +32,7 @@
     "date-fns": "^2.30.0",
     "dompurify": "^3.1.7",
     "history": "^5.3.0",
+    "html5-qrcode": "^2.3.8",
     "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
     "numeral": "^2.0.6",

@@ -26,6 +26,7 @@ export default function LogsView() {
   const [order, setOrder] = useState('desc');
   const [orderBy, setOrderBy] = useState('id');
   const [filter, setFilter] = useState('');
+  const [type, setType] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [logs, setLogs] = useState([]);
   const [totalRows, setTotalRows] = useState(0);
@@ -35,6 +36,9 @@ export default function LogsView() {
     if (filter !== '') {
       url += `&search=${filter}`;
     }
+    if (type !== '') {
+      url += `&type=${type}`;
+    }
 
     try {
       const response = await fetchData(url);
@@ -43,7 +47,7 @@ export default function LogsView() {
     } catch (error) {
       console.error('Erro ao buscar logs:', error);
     }
-  }, [filter, page, rowsPerPage, order, orderBy]);
+  }, [filter, type, page, rowsPerPage, order, orderBy]);
 
   useEffect(() => {
     getAllLogs();
@@ -72,11 +76,16 @@ export default function LogsView() {
     setFilter(event.target.value);
   };
 
+  const handleTypeFilter = (event) => {
+    setPage(0);
+    setType(event.target.value);
+  }
+
   const dataFiltered = applyFilter({
     inputData: logs,
   });
   
-  const notFound = !dataFiltered.length && !!filter;
+  const notFound = !dataFiltered.length && !!(filter || type);
 
   return (
     <Container>
@@ -87,7 +96,9 @@ export default function LogsView() {
       <Card>
         <AccessLogsTableToolbar
           filterName={filter}
+          filterType={type}
           onFilterName={handleFilter}
+          onFilterType={handleTypeFilter}
         />
 
         <Scrollbar>
@@ -118,7 +129,7 @@ export default function LogsView() {
                     />
                   ))}
 
-                {notFound && <TableNoData query={filter} />}
+                {notFound && <TableNoData query={filter} type={type} />}
               </TableBody>
             </Table>
           </TableContainer>

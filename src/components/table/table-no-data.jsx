@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 
 // ----------------------------------------------------------------------
 
-export default function TableNoData({ query, role }) {
+export default function TableNoData({ query, role, type }) {
   const filters = [];
 
   if (query) {
@@ -16,6 +16,10 @@ export default function TableNoData({ query, role }) {
 
   if (role) {
     filters.push(`função "${role}"`);
+  }
+
+  if (type) {
+    filters.push(`tipo "${type}"`);
   }
 
   return (

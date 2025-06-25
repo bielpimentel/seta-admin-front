@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 
 import Toolbar from '@mui/material/Toolbar';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import InputAdornment from '@mui/material/InputAdornment';
 
 import Iconify from 'src/components/iconify';
@@ -10,7 +12,9 @@ import Iconify from 'src/components/iconify';
 
 export default function AccessLogsTableToolbar({ 
   filterName, 
+  filterType,
   onFilterName, 
+  onFilterType, 
 }) {
   return (
     <Toolbar
@@ -35,11 +39,25 @@ export default function AccessLogsTableToolbar({
           </InputAdornment>
         }
       />
+      <Select
+        sx={{ width: 180 }}
+        value={filterType}
+        onChange={onFilterType}
+        displayEmpty
+      >
+        <MenuItem value="">
+          <span style={{color: 'lightgray'}}>Filtrar por tipo...</span>
+        </MenuItem>
+        <MenuItem value="ENTRADA">Entrada</MenuItem>
+        <MenuItem value="SAIDA">Saída</MenuItem>
+      </Select>
     </Toolbar>
   );
 }
 
 AccessLogsTableToolbar.propTypes = {
   filterName: PropTypes.string,
+  filterType: PropTypes.string,
   onFilterName: PropTypes.func,
+  onFilterType: PropTypes.func,
 };
